@@ -106,22 +106,22 @@ $$(BUILDDIR)/$(1):
 
 # First step doesn't actually compile, just generate header dependency information
 # More info on our approach here: http://stackoverflow.com/questions/97338
-$$(BUILDDIR)/$(1)/%.o: %.c | $$(BUILDDIR)/$(1)
+$$(BUILDDIR)/$(1)/%.o: %.c | $$(BUILDDIR)/$(1) precursor
 	$$(TRACE_CC)
 	$$(Q)$$(TOOLCHAIN_$(1))$$(CC_$(1)) $$(CFLAGS) $$(CFLAGS_$(1)) $$(CPPFLAGS) $$(CPPFLAGS_$(1)) -MF"$$(@:.o=.d)" -MG -MM -MP -MT"$$(@:.o=.d)@" -MT"$$@" "$$<"
 	$$(Q)$$(TOOLCHAIN_$(1))$$(CC_$(1)) $$(CFLAGS) $$(CFLAGS_$(1)) $$(CPPFLAGS) $$(CPPFLAGS_$(1)) -c -o $$@ $$<
 
-$$(BUILDDIR)/$(1)/%.o: %.cc | $$(BUILDDIR)/$(1)
+$$(BUILDDIR)/$(1)/%.o: %.cc | $$(BUILDDIR)/$(1) precursor
 	$$(TRACE_CXX)
 	$$(Q)$$(TOOLCHAIN_$(1))$$(CXX) $$(CXXFLAGS) $$(CPPFLAGS) $$(CPPFLAGS_$(1)) -MF"$$(@:.o=.d)" -MG -MM -MP -MT"$$(@:.o=.d)@" -MT"$$@" "$$<"
 	$$(Q)$$(TOOLCHAIN_$(1))$$(CXX) $$(CXXFLAGS) $$(CPPFLAGS) $$(CPPFLAGS_$(1)) -c -o $$@ $$<
 
-$$(BUILDDIR)/$(1)/%.o: %.cpp | $$(BUILDDIR)/$(1)
+$$(BUILDDIR)/$(1)/%.o: %.cpp | $$(BUILDDIR)/$(1) precursor
 	$$(TRACE_CXX)
 	$$(Q)$$(TOOLCHAIN_$(1))$$(CXX) $$(CXXFLAGS) $$(CPPFLAGS) $$(CPPFLAGS_$(1)) -MF"$$(@:.o=.d)" -MG -MM -MP -MT"$$(@:.o=.d)@" -MT"$$@" "$$<"
 	$$(Q)$$(TOOLCHAIN_$(1))$$(CXX) $$(CXXFLAGS) $$(CPPFLAGS) $$(CPPFLAGS_$(1)) -c -o $$@ $$<
 
-$$(BUILDDIR)/$(1)/%.o: %.cxx | $$(BUILDDIR)/$(1)
+$$(BUILDDIR)/$(1)/%.o: %.cxx | $$(BUILDDIR)/$(1) precursor
 	$$(TRACE_CXX)
 	$$(Q)$$(TOOLCHAIN_$(1))$$(CXX) $$(CXXFLAGS) $$(CPPFLAGS) $$(CPPFLAGS_$(1)) -MF"$$(@:.o=.d)" -MG -MM -MP -MT"$$(@:.o=.d)@" -MT"$$@" "$$<"
 	$$(Q)$$(TOOLCHAIN_$(1))$$(CXX) $$(CXXFLAGS) $$(CPPFLAGS) $$(CPPFLAGS_$(1)) -c -o $$@ $$<
@@ -307,6 +307,17 @@ $(foreach platform, $(TOCK_TARGETS), $(eval $(call BUILD_RULES,$(call ARCH_FN,$(
 $(foreach family, $(TOCK_ARCH_FAMILIES), $(eval $(call ARCH_FAMILY_RULES,$(family),$(foreach target, $(filter $(family)%,$(TOCK_TARGETS)), $(call ARCH_FN, $(target))),$(foreach target, $(filter $(family)%,$(TOCK_TARGETS)), $(call OUTPUT_NAME_FN, $(target))))))
 
 
+$(TOCK_USERLAND_BASE_DIR)/lib/libtock-newlibs-$(NEWLIB_VERSION):
+# 	pushd $(TOCK_USERLAND_BASE_DIR)/lib
+# 	./fetch-newlib.sh $(NEWLIB_VERSION)
+# 	popd
+	echo "HOORAY"
+
+newlib: | $(TOCK_USERLAND_BASE_DIR)/lib/libtock-newlib-4$(NEWLIB_VERSION)
+
+.PHONY: precursor
+precursor: | newlib
+	echo "abc"
 
 
 # TAB file generation. Used for Tockloader

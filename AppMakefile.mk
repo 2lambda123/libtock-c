@@ -307,17 +307,18 @@ $(foreach platform, $(TOCK_TARGETS), $(eval $(call BUILD_RULES,$(call ARCH_FN,$(
 $(foreach family, $(TOCK_ARCH_FAMILIES), $(eval $(call ARCH_FAMILY_RULES,$(family),$(foreach target, $(filter $(family)%,$(TOCK_TARGETS)), $(call ARCH_FN, $(target))),$(foreach target, $(filter $(family)%,$(TOCK_TARGETS)), $(call OUTPUT_NAME_FN, $(target))))))
 
 
-$(TOCK_USERLAND_BASE_DIR)/lib/libtock-newlibs-$(NEWLIB_VERSION):
-# 	pushd $(TOCK_USERLAND_BASE_DIR)/lib
-# 	./fetch-newlib.sh $(NEWLIB_VERSION)
-# 	popd
-	echo "HOORAY"
+# Target to download and extract newlib.
+$(TOCK_USERLAND_BASE_DIR)/lib/libtock-newlib-$(NEWLIB_VERSION):
+	pushd $(TOCK_USERLAND_BASE_DIR)/lib
+	./fetch-newlib.sh $(NEWLIB_VERSION)
+	popd
 
-newlib: | $(TOCK_USERLAND_BASE_DIR)/lib/libtock-newlib-4$(NEWLIB_VERSION)
+# We use a custom newlib that is precompiled.
+newlib: | $(TOCK_USERLAND_BASE_DIR)/lib/libtock-newlib-$(NEWLIB_VERSION)
 
+# List of targets that need to happen before any apps are built.
 .PHONY: precursor
 precursor: | newlib
-	echo "abc"
 
 
 # TAB file generation. Used for Tockloader

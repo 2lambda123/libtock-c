@@ -1,8 +1,5 @@
 #!/usr/bin/env bash
 
-# NEWLIB_VERSION=4.3.0.20230120
-# NEWLIB_SHA=afbc6f4c20fc47e56199f043f303c7fde8eb1213a2cb907c463be05ff9c258e9
-
 NEWLIB_VERSION=$1
 
 declare -A NEWLIB_SHAS
@@ -20,7 +17,6 @@ MIRRORS=(\
 )
 
 # Try from each mirror until we successfully download a .zip file.
-# pushd $LIBTOCKC_ROOT_DIR/lib
 for MIRROR in ${MIRRORS[@]}; do
   URL=$MIRROR/$ZIP_FILE
   echo "Fetching newlib from ${MIRROR}..."
@@ -33,4 +29,3 @@ for MIRROR in ${MIRRORS[@]}; do
   fi
 done
 unzip $ZIP_FILE
-# popd

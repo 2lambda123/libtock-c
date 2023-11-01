@@ -29,6 +29,7 @@ SIZE := -size
 
 # Library versions.
 NEWLIB_VERSION ?= 4.3.0.20230120
+LIBCPP_VERSION ?= 12.2.0
 
 # Set default region sizes for process memory requirements.
 STACK_SIZE       ?= 2048
@@ -131,6 +132,7 @@ endif
 ################################################################################
 
 override NEWLIB_BASE_DIR := $(TOCK_USERLAND_BASE_DIR)/lib/libtock-newlib-$(NEWLIB_VERSION)
+override LIBCPP_BASE_DIR := $(TOCK_USERLAND_BASE_DIR)/lib/libtock-libc++-$(LIBCPP_VERSION)
 
 ################################################################################
 ##
@@ -297,23 +299,23 @@ override WLFLAGS_rv32imc  += $(WLFLAGS_rv32)
 override WLFLAGS_rv32imac += $(WLFLAGS_rv32)
 
 override LINK_LIBS_rv32i    += \
-      $(TOCK_USERLAND_BASE_DIR)/libc++/rv32/rv32i/libstdc++.a \
-      $(TOCK_USERLAND_BASE_DIR)/libc++/rv32/rv32i/libsupc++.a \
-      $(TOCK_USERLAND_BASE_DIR)/libc++/rv32/rv32i/libgcc.a \
+      $(LIBCPP_BASE_DIR)/riscv/rv32i/ilp32/libstdc++-v3/src/.libs/libstdc++.a \
+      $(LIBCPP_BASE_DIR)/riscv/rv32i/ilp32/libstdc++-v3/libsupc++/.libs/libsupc++.a \
+      $(LIBCPP_BASE_DIR)/riscv/rv32i/ilp32/libgcc/libgcc.a \
       $(NEWLIB_BASE_DIR)/riscv/rv32i/ilp32/newlib/libc.a \
       $(NEWLIB_BASE_DIR)/riscv/rv32i/ilp32/newlib/libm.a
 
 override LINK_LIBS_rv32imc  += \
-      $(TOCK_USERLAND_BASE_DIR)/libc++/rv32/rv32i/libstdc++.a \
-      $(TOCK_USERLAND_BASE_DIR)/libc++/rv32/rv32i/libsupc++.a \
-      $(TOCK_USERLAND_BASE_DIR)/libc++/rv32/rv32i/libgcc.a \
+      $(LIBCPP_BASE_DIR)/riscv/rv32im/ilp32/libstdc++-v3/src/.libs/libstdc++.a \
+      $(LIBCPP_BASE_DIR)/riscv/rv32im/ilp32/libstdc++-v3/libsupc++/.libs/libsupc++.a \
+      $(LIBCPP_BASE_DIR)/riscv/rv32im/ilp32/libgcc/libgcc.a \
       $(NEWLIB_BASE_DIR)/riscv/rv32im/ilp32/newlib/libc.a \
       $(NEWLIB_BASE_DIR)/riscv/rv32im/ilp32/newlib/libm.a
 
 override LINK_LIBS_rv32imac += \
-      $(TOCK_USERLAND_BASE_DIR)/libc++/rv32/rv32im/libstdc++.a \
-      $(TOCK_USERLAND_BASE_DIR)/libc++/rv32/rv32im/libsupc++.a \
-      $(TOCK_USERLAND_BASE_DIR)/libc++/rv32/rv32im/libgcc.a \
+      $(LIBCPP_BASE_DIR)/riscv/rv32imac/ilp32/libstdc++-v3/src/.libs/libstdc++.a \
+      $(LIBCPP_BASE_DIR)/riscv/rv32imac/ilp32/libstdc++-v3/libsupc++/.libs/libsupc++.a \
+      $(LIBCPP_BASE_DIR)/riscv/rv32imac/ilp32/libgcc/libgcc.a \
       $(NEWLIB_BASE_DIR)/riscv/rv32imac/ilp32/newlib/libc.a \
       $(NEWLIB_BASE_DIR)/riscv/rv32imac/ilp32/newlib/libm.a
 
@@ -379,30 +381,30 @@ override CPPFLAGS_cortex-m7 += $(CPPFLAGS_cortex-m) \
       -mcpu=cortex-m7
 
 override LINK_LIBS_cortex-m0 += \
-      $(TOCK_USERLAND_BASE_DIR)/libc++/cortex-m/v6-m/libstdc++.a \
-      $(TOCK_USERLAND_BASE_DIR)/libc++/cortex-m/v6-m/libsupc++.a \
-      $(TOCK_USERLAND_BASE_DIR)/libc++/cortex-m/v6-m/libgcc.a \
+      $(LIBCPP_BASE_DIR)/thumb/v6-m/nofp/libstdc++-v3/src/.libs/libstdc++.a \
+      $(LIBCPP_BASE_DIR)/thumb/v6-m/nofp/libstdc++-v3/libsupc++/.libs/libsupc++.a \
+      $(LIBCPP_BASE_DIR)/thumb/v6-m/nofp/libgcc/libgcc.a \
       $(NEWLIB_BASE_DIR)/thumb/v6-m/nofp/newlib/libc.a \
       $(NEWLIB_BASE_DIR)/thumb/v6-m/nofp/newlib/libm.a
 
 override LINK_LIBS_cortex-m3 += \
-      $(TOCK_USERLAND_BASE_DIR)/libc++/cortex-m/v7-m/libstdc++.a \
-      $(TOCK_USERLAND_BASE_DIR)/libc++/cortex-m/v7-m/libsupc++.a \
-      $(TOCK_USERLAND_BASE_DIR)/libc++/cortex-m/v7-m/libgcc.a \
+      $(LIBCPP_BASE_DIR)/thumb/v7-m/nofp/libstdc++-v3/src/.libs/libstdc++.a \
+      $(LIBCPP_BASE_DIR)/thumb/v7-m/nofp/libstdc++-v3/libsupc++/.libs/libsupc++.a \
+      $(LIBCPP_BASE_DIR)/thumb/v7-m/nofp/libgcc/libgcc.a \
       $(NEWLIB_BASE_DIR)/thumb/v7-m/nofp/newlib/libc.a \
       $(NEWLIB_BASE_DIR)/thumb/v7-m/nofp/newlib/libm.a
 
 override LINK_LIBS_cortex-m4 += \
-      $(TOCK_USERLAND_BASE_DIR)/libc++/cortex-m/v7e-m/libstdc++.a \
-      $(TOCK_USERLAND_BASE_DIR)/libc++/cortex-m/v7e-m/libsupc++.a \
-      $(TOCK_USERLAND_BASE_DIR)/libc++/cortex-m/v7e-m/libgcc.a \
+      $(LIBCPP_BASE_DIR)/thumb/v7e-m/nofp/libstdc++-v3/src/.libs/libstdc++.a \
+      $(LIBCPP_BASE_DIR)/thumb/v7e-m/nofp/libstdc++-v3/libsupc++/.libs/libsupc++.a \
+      $(LIBCPP_BASE_DIR)/thumb/v7e-m/nofp/libgcc/libgcc.a \
       $(NEWLIB_BASE_DIR)/thumb/v7e-m/nofp/newlib/libc.a \
       $(NEWLIB_BASE_DIR)/thumb/v7e-m/nofp/newlib/libm.a
 
 override LINK_LIBS_cortex-m7 += \
-      $(TOCK_USERLAND_BASE_DIR)/libc++/cortex-m/v7e-m/libstdc++.a \
-      $(TOCK_USERLAND_BASE_DIR)/libc++/cortex-m/v7e-m/libsupc++.a \
-      $(TOCK_USERLAND_BASE_DIR)/libc++/cortex-m/v7e-m/libgcc.a \
+      $(LIBCPP_BASE_DIR)/thumb/v7e-m/nofp/libstdc++-v3/src/.libs/libstdc++.a \
+      $(LIBCPP_BASE_DIR)/thumb/v7e-m/nofp/libstdc++-v3/libsupc++/.libs/libsupc++.a \
+      $(LIBCPP_BASE_DIR)/thumb/v7e-m/nofp/libgcc/libgcc.a \
       $(NEWLIB_BASE_DIR)/thumb/v7e-m/nofp/newlib/libc.a \
       $(NEWLIB_BASE_DIR)/thumb/v7e-m/nofp/newlib/libm.a
 

@@ -315,11 +315,11 @@ $(TOCK_USERLAND_BASE_DIR)/lib/libtock-newlib-$(NEWLIB_VERSION):
 newlib: | $(TOCK_USERLAND_BASE_DIR)/lib/libtock-newlib-$(NEWLIB_VERSION)
 
 # Target to download and extract the C++ libraries.
-$(TOCK_USERLAND_BASE_DIR)/lib/libtock-libc++-$(GCC_VERSION):
-	cd $(TOCK_USERLAND_BASE_DIR)/lib; ./fetch-libc++.sh $(GCC_VERSION)
+$(TOCK_USERLAND_BASE_DIR)/lib/libtock-libc++-$(LIBCPP_VERSION):
+	cd $(TOCK_USERLAND_BASE_DIR)/lib; ./fetch-libc++.sh $(LIBCPP_VERSION)
 
 # We use custom C++ libraries that are precompiled.
-libc++: | $(TOCK_USERLAND_BASE_DIR)/lib/libtock-libc++-$(GCC_VERSION)
+libc++: | $(TOCK_USERLAND_BASE_DIR)/lib/libtock-libc++-$(LIBCPP_VERSION)
 
 # List of targets that need to happen before any apps are built.
 .PHONY: precursor

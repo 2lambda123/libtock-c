@@ -29,10 +29,10 @@ rebuild-gcc: gcc-$(GCC_VERSION)
 	@echo ""
 	mkdir -p libtock-libc++-$(GCC_VERSION)/thumb
 	mkdir -p libtock-libc++-$(GCC_VERSION)/riscv
-	rsync -ram --exclude='/*/*/*/*/' --include='libgcc.a' --include='*/' --exclude='*' gcc-arm-$(GCC_VERSION)-out/arm-none-eabi/ libtock-libc++-$(GCC_VERSION)/thumb/
-	rsync -ram --exclude='/*/*/*/*/*/*/' --include='libstdc++.a' --include='libsupc++.a' --include='*/' --exclude='*' gcc-arm-$(GCC_VERSION)-out/arm-none-eabi/ libtock-libc++-$(GCC_VERSION)/thumb/
-	rsync -ram --exclude='/*/*/*/*/' --include='libgcc.a' --include='*/' --exclude='*' gcc-riscv-$(GCC_VERSION)-out/riscv64-elf/ libtock-libc++-$(GCC_VERSION)/riscv/
-	rsync -ram --exclude='/*/*/*/*/*/*/' --include='libstdc++.a' --include='libsupc++.a' --include='*/' --exclude='*' gcc-riscv-$(GCC_VERSION)-out/riscv64-elf/ libtock-libc++-$(GCC_VERSION)/riscv/
+	rsync -ram --include='libgcc.a' --include='*/' --exclude='*' gcc-arm-$(GCC_VERSION)-out/arm-none-eabi/thumb/ libtock-libc++-$(GCC_VERSION)/thumb/
+	rsync -ram --include='libstdc++.a' --include='libsupc++.a' --include='*/' --exclude='*' gcc-arm-$(GCC_VERSION)-out/arm-none-eabi/thumb/ libtock-libc++-$(GCC_VERSION)/thumb/
+	rsync -ram --include='libgcc.a' --include='*/' --exclude='*' gcc-riscv-$(GCC_VERSION)-out/riscv64-elf/ libtock-libc++-$(GCC_VERSION)/riscv/
+	rsync -ram --include='libstdc++.a' --include='libsupc++.a' --include='*/' --exclude='*' gcc-riscv-$(GCC_VERSION)-out/riscv64-elf/ libtock-libc++-$(GCC_VERSION)/riscv/
 
 
 clean:

@@ -11,8 +11,8 @@ ZIP_FILE=libtock-newlib-$NEWLIB_VERSION.zip
 
 # List of mirrors we support.
 MIRRORS=(\
-  "https://www.cs.virginia.edu/~bjc8c/archive/tock/"\
-  "https://alpha.mirror.svc.schuermann.io/files/"\
+  "https://www.cs.virginia.edu/~bjc8c/archive/tock"\
+  "https://alpha.mirror.svc.schuermann.io/files"\
 )
 
 let FOUND=0

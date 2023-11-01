@@ -3,7 +3,7 @@
 GCC_VERSION=$1
 
 if [ $GCC_VERSION = "12.2.0" ]; then
-  GCC_SHA="afbc6f4c20fc47e56199f043f303c7fde8eb1213a2cb907c463be05ff9c258e9"
+  GCC_SHA="f879b8763de38b34ab904d1ed8733e9accf60f4f9ccab78462bb525767691420"
 fi
 
 # Name of the pre-created compiled directories.
@@ -11,8 +11,8 @@ ZIP_FILE=libtock-libc++-$GCC_VERSION.zip
 
 # List of mirrors we support.
 MIRRORS=(\
-  "https://www.cs.virginia.edu/~bjc8c/archive/tock/"\
-  "https://alpha.mirror.svc.schuermann.io/files/"\
+  "https://www.cs.virginia.edu/~bjc8c/archive/tock"\
+  "https://alpha.mirror.svc.schuermann.io/files"\
 )
 
 let FOUND=0

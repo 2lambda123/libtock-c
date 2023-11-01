@@ -3,7 +3,7 @@
 NEWLIB_VERSION=$1
 
 if [ $NEWLIB_VERSION = "4.3.0.20230120" ]; then
-  NEWLIB_SHA="afbc6f4c20fc47e56199f043f303c7fde8eb1213a2cb907c463be05ff9c258e9"
+  NEWLIB_SHA="ac18e6c90ff589a4273bab69438eea660cfa35ea67b99eccc85d6dd646a68b81"
 fi
 
 # Name of the pre-created compiled directories.

@@ -25,6 +25,9 @@ include $(TOCK_USERLAND_BASE_DIR)/Configuration.mk
 # Helper functions.
 include $(TOCK_USERLAND_BASE_DIR)/Helpers.mk
 
+# Targets for fetching pre-compiled libraries.
+include $(TOCK_USERLAND_BASE_DIR)/Precompiled.mk
+
 # Include the libtock makefile. Adds rules that will rebuild the core libtock
 # library when needed.
 include $(TOCK_USERLAND_BASE_DIR)/libtock/Makefile
@@ -306,20 +309,6 @@ $(foreach platform, $(TOCK_ARCHS), $(eval $(call BUILD_RULES_PER_ARCH,$(platform
 $(foreach platform, $(TOCK_TARGETS), $(eval $(call BUILD_RULES,$(call ARCH_FN,$(platform)),$(call OUTPUT_NAME_FN,$(platform)),$(call FLASH_ADDRESS_FN,$(platform)),$(call RAM_ADDRESS_FN,$(platform)))))
 $(foreach family, $(TOCK_ARCH_FAMILIES), $(eval $(call ARCH_FAMILY_RULES,$(family),$(foreach target, $(filter $(family)%,$(TOCK_TARGETS)), $(call ARCH_FN, $(target))),$(foreach target, $(filter $(family)%,$(TOCK_TARGETS)), $(call OUTPUT_NAME_FN, $(target))))))
 
-
-# Target to download and extract newlib.
-$(TOCK_USERLAND_BASE_DIR)/lib/libtock-newlib-$(NEWLIB_VERSION):
-	cd $(TOCK_USERLAND_BASE_DIR)/lib; ./fetch-newlib.sh $(NEWLIB_VERSION)
-
-# We use a custom newlib that is precompiled.
-newlib: | $(TOCK_USERLAND_BASE_DIR)/lib/libtock-newlib-$(NEWLIB_VERSION)
-
-# Target to download and extract the C++ libraries.
-$(TOCK_USERLAND_BASE_DIR)/lib/libtock-libc++-$(LIBCPP_VERSION):
-	cd $(TOCK_USERLAND_BASE_DIR)/lib; ./fetch-libc++.sh $(LIBCPP_VERSION)
-
-# We use custom C++ libraries that are precompiled.
-libc++: | $(TOCK_USERLAND_BASE_DIR)/lib/libtock-libc++-$(LIBCPP_VERSION)
 
 # List of targets that need to happen before any apps are built.
 .PHONY: precursor

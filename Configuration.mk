@@ -270,7 +270,8 @@ override CFLAGS_rv32imac += $(CFLAGS_rv32)
 
 # Set the base `CPPFLAGS` for all RISC-V variants based on the toolchain family.
 override CPPFLAGS_rv32 += \
-      $(CPPFLAGS_toolchain_rv32)
+      $(CPPFLAGS_toolchain_rv32) \
+      -I$(LIBCPP_BASE_DIR)/riscv/headers
 
 # Set the `CPPFLAGS` for RISC-V. Here we need different flags for different
 # variants.
@@ -364,7 +365,9 @@ override CPPFLAGS_cortex-m += \
       -mfloat-abi=soft\
       -msingle-pic-base\
       -mpic-register=r9\
-      -mno-pic-data-is-text-relative
+      -mno-pic-data-is-text-relative\
+      -I$(LIBCPP_BASE_DIR)/thumb/headers\
+      -I$(LIBCPP_BASE_DIR)/thumb/headers/arm-none-eabi
 
 # Work around https://gcc.gnu.org/bugzilla/show_bug.cgi?id=85606
 override CPPFLAGS_cortex-m0 += $(CPPFLAGS_cortex-m) \

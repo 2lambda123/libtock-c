@@ -44,19 +44,23 @@ rebuild-gcc: gcc-$(GCC_VERSION)
 	@echo "=== BEGINNING ARM BUILD =========================="
 	@echo ""
 	@mkdir -p gcc-arm-$(GCC_VERSION)-out
+	@mkdir -p gcc-arm-$(GCC_VERSION)-install
 	@echo "Entering directory gcc-arm-$(GCC_VERSION)-out"
-	cd gcc-arm-$(GCC_VERSION)-out; ../build-arm.sh ../$< $(NEWLIB_INCLUDE_PATH)
+	cd gcc-arm-$(GCC_VERSION)-out; ../build-arm.sh ../$< ../gcc-arm-$(GCC_VERSION)-install $(NEWLIB_INCLUDE_PATH)
 	@echo ""
 	@echo "=== BEGINNING RISC-V BUILD =========================="
 	@echo ""
 	@mkdir -p gcc-riscv-$(GCC_VERSION)-out
+	@mkdir -p gcc-riscv-$(GCC_VERSION)-install
 	@echo "Entering directory gcc-riscv-$(GCC_VERSION)-out"
-	cd gcc-riscv-$(GCC_VERSION)-out; ../build-riscv.sh ../$< $(NEWLIB_INCLUDE_PATH) $(TOOLCHAIN_rv32i)
+	cd gcc-riscv-$(GCC_VERSION)-out; ../build-riscv.sh ../$< ../gcc-riscv-$(GCC_VERSION)-install $(NEWLIB_INCLUDE_PATH) $(TOOLCHAIN_rv32i)
 	@echo ""
 	@echo "=== PACKAGING LIBC++ ARTIFACTS =========================="
 	@echo ""
 	@mkdir -p libtock-libc++-$(GCC_VERSION)/thumb
 	@mkdir -p libtock-libc++-$(GCC_VERSION)/riscv
+	@cp -r gcc-arm-$(GCC_VERSION)-install/arm-none-eabi/include/c++/$(GCC_VERSION) libtock-libc++-$(GCC_VERSION)/thumb/headers
+	@cp -r gcc-arm-$(GCC_VERSION)-install/$(TOOLCHAIN_rv32i)/include/c++/$(GCC_VERSION) libtock-libc++-$(GCC_VERSION)/riscv/headers
 	@rsync -ram --include='libgcc.a' --include='*/' --exclude='*' gcc-arm-$(GCC_VERSION)-out/arm-none-eabi/thumb/ libtock-libc++-$(GCC_VERSION)/thumb/
 	@rsync -ram --include='libstdc++.a' --include='libsupc++.a' --include='*/' --exclude='*' gcc-arm-$(GCC_VERSION)-out/arm-none-eabi/thumb/ libtock-libc++-$(GCC_VERSION)/thumb/
 	@rsync -ram --include='libgcc.a' --include='*/' --exclude='*' gcc-riscv-$(GCC_VERSION)-out/$(TOOLCHAIN_rv32i)/ libtock-libc++-$(GCC_VERSION)/riscv/

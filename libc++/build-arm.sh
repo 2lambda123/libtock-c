@@ -1,7 +1,8 @@
 #!/usr/bin/env bash
 
 GCC_SRC_DIR=$1
-LIBC_INCLUDE_PATH=$2
+GCC_INSTALL_DIR=$2
+LIBC_INCLUDE_PATH=$3
 
 if [[ ! -e $LIBC_INCLUDE_PATH ]]; then
   echo "ERROR: Missing LIBC_INCLUDE_PATH, expected"
@@ -69,5 +70,7 @@ $GCC_SRC_DIR/configure \
   --with-newlib $extra_with \
   --with-headers=$LIBC_INCLUDE_PATH \
   --enable-languages="c c++" \
+  --prefix=`realpath $GCC_INSTALL_DIR` \
 
 make -j$(nproc)
+make install

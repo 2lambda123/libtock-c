@@ -1,4 +1,4 @@
-GCC_VERSION ?= 11.2.0
+GCC_VERSION ?= 13.2.0
 NEWLIB_VERSION ?= 4.2.0.20211231
 
 all: rebuild-gcc
@@ -23,7 +23,7 @@ NEWLIB_INCLUDE_PATH ?= ../newlib-$(NEWLIB_VERSION)/newlib/libc/include
 
 gcc-$(GCC_VERSION).tar.xz:
 	@echo "Downloading gcc source $(@F)"
-	@wget -q -O $@ 'https://bigsearcher.com/mirrors/gcc/releases/gcc-$(GCC_VERSION)/gcc-$(GCC_VERSION).tar.xz'
+	@wget -q -O $@ 'https://mirrors.sarata.com/gnu/gcc/gcc-$(GCC_VERSION)/gcc-$(GCC_VERSION).tar.xz'
 
 gcc-$(GCC_VERSION): gcc-$(GCC_VERSION).tar.xz | newlib-$(NEWLIB_VERSION)
 	@echo "Extracting $(<F)"

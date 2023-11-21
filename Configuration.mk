@@ -271,7 +271,8 @@ override CFLAGS_rv32imac += $(CFLAGS_rv32)
 # Set the base `CPPFLAGS` for all RISC-V variants based on the toolchain family.
 override CPPFLAGS_rv32 += \
       $(CPPFLAGS_toolchain_rv32) \
-      -I$(LIBCPP_BASE_DIR)/riscv/headers
+      -I$(LIBCPP_BASE_DIR)/riscv/headers\
+      -I$(LIBCPP_BASE_DIR)/riscv/headers/riscv64-unknown-elf
 
 # Set the `CPPFLAGS` for RISC-V. Here we need different flags for different
 # variants.

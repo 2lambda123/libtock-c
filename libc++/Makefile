@@ -60,7 +60,7 @@ rebuild-gcc: gcc-$(GCC_VERSION)
 	@mkdir -p libtock-libc++-$(GCC_VERSION)/thumb
 	@mkdir -p libtock-libc++-$(GCC_VERSION)/riscv
 	@cp -r gcc-arm-$(GCC_VERSION)-install/arm-none-eabi/include/c++/$(GCC_VERSION) libtock-libc++-$(GCC_VERSION)/thumb/headers
-	@cp -r gcc-arm-$(GCC_VERSION)-install/$(TOOLCHAIN_rv32i)/include/c++/$(GCC_VERSION) libtock-libc++-$(GCC_VERSION)/riscv/headers
+	@cp -r gcc-riscv-$(GCC_VERSION)-install/$(TOOLCHAIN_rv32i)/include/c++/$(GCC_VERSION) libtock-libc++-$(GCC_VERSION)/riscv/headers
 	@rsync -ram --include='libgcc.a' --include='*/' --exclude='*' gcc-arm-$(GCC_VERSION)-out/arm-none-eabi/thumb/ libtock-libc++-$(GCC_VERSION)/thumb/
 	@rsync -ram --include='libstdc++.a' --include='libsupc++.a' --include='*/' --exclude='*' gcc-arm-$(GCC_VERSION)-out/arm-none-eabi/thumb/ libtock-libc++-$(GCC_VERSION)/thumb/
 	@rsync -ram --include='libgcc.a' --include='*/' --exclude='*' gcc-riscv-$(GCC_VERSION)-out/$(TOOLCHAIN_rv32i)/ libtock-libc++-$(GCC_VERSION)/riscv/

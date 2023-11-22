@@ -32,7 +32,7 @@ gcc-$(GCC_VERSION): gcc-$(GCC_VERSION).tar.xz | newlib-$(NEWLIB_VERSION)
 
 newlib-$(NEWLIB_VERSION).tar.gz:
 	@echo "Downloading newlib source $(@F)"
-	@wget -q -O $@ ftp://sourceware.org/pub/newlib/newlib-$(NEWLIB_VERSION).tar.gz
+	@wget -q -O $@ https://sourceware.mirror.garr.it/newlib/newlib-$(NEWLIB_VERSION).tar.gz
 
 newlib-$(NEWLIB_VERSION): newlib-$(NEWLIB_VERSION).tar.gz
 	@echo "Extracting $(<F)"

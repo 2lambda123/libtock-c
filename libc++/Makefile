@@ -1,4 +1,4 @@
-GCC_VERSION ?= 13.2.0
+GCC_VERSION ?= 12.3.0
 NEWLIB_VERSION ?= 4.2.0.20211231
 
 all: rebuild-gcc

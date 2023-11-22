@@ -34,7 +34,7 @@ newlib-$(NEWLIB_VERSION).tar.gz:
 	@echo "Downloading newlib source $(@F)"
 	@wget -q -O $@ ftp://sourceware.org/pub/newlib/newlib-$(NEWLIB_VERSION).tar.gz
 
-newlib-$(NEWLIB_VERSION): newlib-$(NEWLIB_VERSION).tar.gz newlib-$(NEWLIB_VERSION)
+newlib-$(NEWLIB_VERSION): newlib-$(NEWLIB_VERSION).tar.gz
 	@echo "Extracting $(<F)"
 	@tar -xzf $<
 	@touch $@ # Touch so directory appears newer than tarball
@@ -48,14 +48,14 @@ rebuild-gcc: gcc-$(GCC_VERSION)
 	@echo "Entering directory gcc-arm-$(GCC_VERSION)-out"
 	cd gcc-arm-$(GCC_VERSION)-out; ../build-arm.sh ../$< ../gcc-arm-$(GCC_VERSION)-install $(NEWLIB_INCLUDE_PATH)
 	@echo ""
-	@echo "=== BEGINNING RISC-V BUILD =========================="
+	@echo "=== BEGINNING RISC-V BUILD ======================="
 	@echo ""
 	@mkdir -p gcc-riscv-$(GCC_VERSION)-out
 	@mkdir -p gcc-riscv-$(GCC_VERSION)-install
 	@echo "Entering directory gcc-riscv-$(GCC_VERSION)-out"
 	cd gcc-riscv-$(GCC_VERSION)-out; ../build-riscv.sh ../$< ../gcc-riscv-$(GCC_VERSION)-install $(NEWLIB_INCLUDE_PATH) $(TOOLCHAIN_rv32i)
 	@echo ""
-	@echo "=== PACKAGING LIBC++ ARTIFACTS =========================="
+	@echo "=== PACKAGING LIBC++ ARTIFACTS ==================="
 	@echo ""
 	@mkdir -p libtock-libc++-$(GCC_VERSION)/thumb
 	@mkdir -p libtock-libc++-$(GCC_VERSION)/riscv
@@ -70,8 +70,10 @@ rebuild-gcc: gcc-$(GCC_VERSION)
 
 clean:
 	rm -f gcc-$(GCC_VERSION).tar.xz
+	rm -f newlib-$(NEWLIB_VERSION).tar.gz
 	rm -rf gcc-$(GCC_VERSION)
 	rm -rf gcc-$(GCC_VERSION)-out
+	rm -rf gcc-$(GCC_VERSION)-install
 
 .PHONY: clean rebuild-gcc
 

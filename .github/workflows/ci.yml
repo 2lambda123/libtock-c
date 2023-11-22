@@ -23,7 +23,7 @@ jobs:
           submodules: false # LVGL makefile manually installs the submodule
       - uses: carlosperate/arm-none-eabi-gcc-action@v1
         with:
-          release: '13.2.Rel1' # The arm-none-eabi-gcc release to use.
+          release: '10.3-2021.07' # The arm-none-eabi-gcc release to use.
       - name: setup-riscv-toolchain
         run: sudo apt-get install -y gcc-riscv64-unknown-elf
       - name: ci-format

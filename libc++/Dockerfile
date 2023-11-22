@@ -21,7 +21,7 @@ RUN apt install -y libmpc-dev file
 
 # Clone the libtock-c source so we can use the build scripts
 RUN git clone https://github.com/tock/libtock-c --depth 1 -b make-precompiled
-RUN cd libtock-c && git fetch && git checkout 0fed22764837d9d4cfe44e59477f8e68f1a544c7
+RUN cd libtock-c && git fetch && git checkout f21df388a5284dce3f1425e4120930f6d9e57396
 
 # Actually build the toolchain
 RUN cd libtock-c/libc++ && make

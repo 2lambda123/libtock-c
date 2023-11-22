@@ -25,9 +25,9 @@ To help ensure reproducibility, we also include a Dockerfile which can be used
 to create the libc++ libraries.
 
 ```bash
-LIBCPP=12.3.0
+LIBCPP=10.5.0
 cd libtock-c/libc++
-docker build -t libtock-c-libcpp .
-id=$(docker create libtock-c-libcpp)
+docker build -t libtock-c-libcpp-$LIBCPP .
+id=$(docker create libtock-c-libcpp-$LIBCPP)
 docker cp $id:/libtock-c/libc++/libtock-libc++-$LIBCPP.zip libtock-libc++-$LIBCPP.zip
 ```

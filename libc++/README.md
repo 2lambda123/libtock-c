@@ -34,3 +34,22 @@ docker cp $id:/libtock-c/libc++/libtock-libc++-10.5.0.zip libtock-libc++-10.5.0.
 docker cp $id:/libtock-c/libc++/libtock-libc++-11.4.0.zip libtock-libc++-11.4.0.zip
 docker cp $id:/libtock-c/libc++/libtock-libc++-12.3.0.zip libtock-libc++-12.3.0.zip
 ```
+
+libtock-libc++ Structure
+------------------------
+
+To create the precompiled library we build GCC for both ARM (arm-none-eabi) and
+RISC-V (riscv64-unknown-elf) and package the resulting headers and libraries.
+We preserve the folder structure from GCC.
+
+```
+libtock-libc++-$(GCC_VERSION)/arm
+       /arm-none-eabi/include/c++/$(GCC_VERSION)                   # Headers
+       /arm-none-eabi/lib/thumb/<sub arch>/nofp                    # libstdc++.a
+       /lib/gcc/arm-none-eabi/$(GCC_VERSION)/thumb/<sub arch>/nofp # libgcc.a
+
+libtock-libc++-$(GCC_VERSION)/riscv
+       /riscv64-unknown-elf/include/c++/$(GCC_VERSION)              # Headers
+       /riscv64-unknown-elf/lib/<sub arch>/ilp32                    # libstdc++.a
+       /lib/gcc/riscv64-unknown-elf/$(GCC_VERSION)/<sub arch>/ilp32 # libgcc.a
+```

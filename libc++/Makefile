@@ -1,7 +1,10 @@
-GCC_VERSION ?= 10.5.0
 NEWLIB_VERSION ?= 4.2.0.20211231
 
 all: rebuild-gcc
+
+ifeq ($(GCC_VERSION),)
+  $(error Need to set the GCC_VERSION variable to choose which to build.)
+else
 
 # Determine which RISC-V toolchain is installed.
 ifneq (,$(shell which riscv64-none-elf-gcc 2>/dev/null))
@@ -57,14 +60,12 @@ rebuild-gcc: gcc-$(GCC_VERSION)
 	@echo ""
 	@echo "=== PACKAGING LIBC++ ARTIFACTS ==================="
 	@echo ""
-	@mkdir -p libtock-libc++-$(GCC_VERSION)/thumb
+	@mkdir -p libtock-libc++-$(GCC_VERSION)/arm
+	@cp -r gcc-arm-$(GCC_VERSION)-install/lib libtock-libc++-$(GCC_VERSION)/arm
+	@cp -r gcc-arm-$(GCC_VERSION)-install/arm-none-eabi libtock-libc++-$(GCC_VERSION)/arm
 	@mkdir -p libtock-libc++-$(GCC_VERSION)/riscv
-	@cp -r gcc-arm-$(GCC_VERSION)-install/arm-none-eabi/include/c++/$(GCC_VERSION) libtock-libc++-$(GCC_VERSION)/thumb/headers
-	@cp -r gcc-riscv-$(GCC_VERSION)-install/$(TOOLCHAIN_rv32i)/include/c++/$(GCC_VERSION) libtock-libc++-$(GCC_VERSION)/riscv/headers
-	@rsync -ram --include='libgcc.a' --include='*/' --exclude='*' gcc-arm-$(GCC_VERSION)-out/arm-none-eabi/thumb/ libtock-libc++-$(GCC_VERSION)/thumb/
-	@rsync -ram --include='libstdc++.a' --include='libsupc++.a' --include='*/' --exclude='*' gcc-arm-$(GCC_VERSION)-out/arm-none-eabi/thumb/ libtock-libc++-$(GCC_VERSION)/thumb/
-	@rsync -ram --include='libgcc.a' --include='*/' --exclude='*' gcc-riscv-$(GCC_VERSION)-out/$(TOOLCHAIN_rv32i)/ libtock-libc++-$(GCC_VERSION)/riscv/
-	@rsync -ram --include='libstdc++.a' --include='libsupc++.a' --include='*/' --exclude='*' gcc-riscv-$(GCC_VERSION)-out/$(TOOLCHAIN_rv32i)/ libtock-libc++-$(GCC_VERSION)/riscv/
+	@cp -r gcc-riscv-$(GCC_VERSION)-install/lib libtock-libc++-$(GCC_VERSION)/riscv
+	@cp -r gcc-riscv-$(GCC_VERSION)-install/$(TOOLCHAIN_rv32i) libtock-libc++-$(GCC_VERSION)/riscv
 	@zip -r libtock-libc++-$(GCC_VERSION).zip libtock-libc++-$(GCC_VERSION)
 
 

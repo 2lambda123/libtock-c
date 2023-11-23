@@ -4,7 +4,7 @@ all: rebuild-gcc
 
 ifeq ($(GCC_VERSION),)
   $(error Need to set the GCC_VERSION variable to choose which to build.)
-else
+endif
 
 # Determine which RISC-V toolchain is installed.
 ifneq (,$(shell which riscv64-none-elf-gcc 2>/dev/null))

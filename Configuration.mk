@@ -29,7 +29,6 @@ SIZE := -size
 
 # Library versions.
 NEWLIB_VERSION ?= 4.2.0.20211231
-LIBCPP_VERSION ?= 10.5.0
 
 # Set default region sizes for process memory requirements.
 STACK_SIZE       ?= 2048
@@ -131,10 +130,7 @@ endif
 ##
 ################################################################################
 
-
-
 override NEWLIB_BASE_DIR := $(TOCK_USERLAND_BASE_DIR)/lib/libtock-newlib-$(NEWLIB_VERSION)
-override LIBCPP_BASE_DIR := $(TOCK_USERLAND_BASE_DIR)/lib/libtock-libc++-$(LIBCPP_VERSION)
 
 ################################################################################
 ##
@@ -261,7 +257,7 @@ CC_rv32_version_major := $(shell echo $(CC_rv32_version) | cut -f1 -d.)
 ifeq ($(CC_rv32_version_major),10)
   LIBCPP_VERSION_rv32 := 10.5.0
 else ifeq ($(CC_rv32_version_major),11)
-  LIBCPP_VERSION_rv32 := 11.2.0
+  LIBCPP_VERSION_rv32 := 11.4.0
 else ifeq ($(CC_rv32_version_major),12)
   LIBCPP_VERSION_rv32 := 12.3.0
 else
@@ -419,30 +415,30 @@ override CPPFLAGS_cortex-m7 += $(CPPFLAGS_cortex-m) \
       -mcpu=cortex-m7
 
 override LINK_LIBS_cortex-m0 += \
-      $(LIBCPP_BASE_DIR_cortex-m)/arm/arm-none-eabi/lib/v6-m/nofp/libstdc++.a \
-      $(LIBCPP_BASE_DIR_cortex-m)/arm/arm-none-eabi/lib/v6-m/nofp/libsupc++.a \
-      $(LIBCPP_BASE_DIR_cortex-m)/arm/lib/gcc/arm-none-eabi/$(LIBCPP_VERSION_cortex-m)/v6-m/nofp/libgcc.a \
+      $(LIBCPP_BASE_DIR_cortex-m)/arm/arm-none-eabi/lib/thumb/v6-m/nofp/libstdc++.a \
+      $(LIBCPP_BASE_DIR_cortex-m)/arm/arm-none-eabi/lib/thumb/v6-m/nofp/libsupc++.a \
+      $(LIBCPP_BASE_DIR_cortex-m)/arm/lib/gcc/arm-none-eabi/$(LIBCPP_VERSION_cortex-m)/thumb/v6-m/nofp/libgcc.a \
       $(NEWLIB_BASE_DIR)/thumb/v6-m/nofp/newlib/libc.a \
       $(NEWLIB_BASE_DIR)/thumb/v6-m/nofp/newlib/libm.a
 
 override LINK_LIBS_cortex-m3 += \
-      $(LIBCPP_BASE_DIR_cortex-m)/arm/arm-none-eabi/lib/v7-m/nofp/libstdc++.a \
-      $(LIBCPP_BASE_DIR_cortex-m)/arm/arm-none-eabi/lib/v7-m/nofp/libsupc++.a \
-      $(LIBCPP_BASE_DIR_cortex-m)/arm/lib/gcc/arm-none-eabi/$(LIBCPP_VERSION_cortex-m)/v7-m/nofp/libgcc.a \
+      $(LIBCPP_BASE_DIR_cortex-m)/arm/arm-none-eabi/lib/thumb/v7-m/nofp/libstdc++.a \
+      $(LIBCPP_BASE_DIR_cortex-m)/arm/arm-none-eabi/lib/thumb/v7-m/nofp/libsupc++.a \
+      $(LIBCPP_BASE_DIR_cortex-m)/arm/lib/gcc/arm-none-eabi/$(LIBCPP_VERSION_cortex-m)/thumb/v7-m/nofp/libgcc.a \
       $(NEWLIB_BASE_DIR)/thumb/v7-m/nofp/newlib/libc.a \
       $(NEWLIB_BASE_DIR)/thumb/v7-m/nofp/newlib/libm.a
 
 override LINK_LIBS_cortex-m4 += \
-      $(LIBCPP_BASE_DIR_cortex-m)/arm/arm-none-eabi/lib/v7e-m/nofp/libstdc++.a \
-      $(LIBCPP_BASE_DIR_cortex-m)/arm/arm-none-eabi/lib/v7e-m/nofp/libsupc++.a \
-      $(LIBCPP_BASE_DIR_cortex-m)/arm/lib/gcc/arm-none-eabi/$(LIBCPP_VERSION_cortex-m)/v7e-m/nofp/libgcc.a \
+      $(LIBCPP_BASE_DIR_cortex-m)/arm/arm-none-eabi/lib/thumb/v7e-m/nofp/libstdc++.a \
+      $(LIBCPP_BASE_DIR_cortex-m)/arm/arm-none-eabi/lib/thumb/v7e-m/nofp/libsupc++.a \
+      $(LIBCPP_BASE_DIR_cortex-m)/arm/lib/gcc/arm-none-eabi/$(LIBCPP_VERSION_cortex-m)/thumb/v7e-m/nofp/libgcc.a \
       $(NEWLIB_BASE_DIR)/thumb/v7e-m/nofp/newlib/libc.a \
       $(NEWLIB_BASE_DIR)/thumb/v7e-m/nofp/newlib/libm.a
 
 override LINK_LIBS_cortex-m7 += \
-      $(LIBCPP_BASE_DIR_cortex-m)/arm/arm-none-eabi/lib/v7e-m/nofp/libstdc++.a \
-      $(LIBCPP_BASE_DIR_cortex-m)/arm/arm-none-eabi/lib/v7e-m/nofp/libsupc++.a \
-      $(LIBCPP_BASE_DIR_cortex-m)/arm/lib/gcc/arm-none-eabi/$(LIBCPP_VERSION_cortex-m)/v7e-m/nofp/libgcc.a \
+      $(LIBCPP_BASE_DIR_cortex-m)/arm/arm-none-eabi/lib/thumb/v7e-m/nofp/libstdc++.a \
+      $(LIBCPP_BASE_DIR_cortex-m)/arm/arm-none-eabi/lib/thumb/v7e-m/nofp/libsupc++.a \
+      $(LIBCPP_BASE_DIR_cortex-m)/arm/lib/gcc/arm-none-eabi/$(LIBCPP_VERSION_cortex-m)/thumb/v7e-m/nofp/libgcc.a \
       $(NEWLIB_BASE_DIR)/thumb/v7e-m/nofp/newlib/libc.a \
       $(NEWLIB_BASE_DIR)/thumb/v7e-m/nofp/newlib/libm.a
 

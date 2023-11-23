@@ -1,5 +1,5 @@
---- a/libtock-newlib-4.2.0.20211231/headers/ssp/string.h
-+++ b/libtock-newlib-4.2.0.20211231/headers/ssp/string.h
+--- a/include/ssp/string.h
++++ b/include/ssp/string.h
 @@ -36,7 +36,7 @@
 
  __BEGIN_DECLS
@@ -10,8 +10,8 @@
  void *__memset_chk(void *, int, size_t, size_t);
  char *__stpcpy_chk(char *, const char *, size_t);
 
---- a/libtock-newlib-4.2.0.20211231/headers/ssp/stdlib.h
-+++ b/libtock-newlib-4.2.0.20211231/headers/ssp/stdlib.h
+--- a/include/ssp/stdlib.h
++++ b/include/ssp/stdlib.h
 @@ -20,7 +20,7 @@
  __ssp_decl(int, wctomb, (char *__buf, wchar_t __wc))
  {

@@ -1,6 +1,8 @@
-NEWLIB_VERSION ?= 4.2.0.20211231
-
 all: rebuild-newlib
+
+ifeq ($(NEWLIB_VERSION),)
+  $(error Need to set the NEWLIB_VERSION variable to choose which to build.)
+endif
 
 # Determine which RISC-V toolchain is installed.
 ifneq (,$(shell which riscv64-none-elf-gcc 2>/dev/null))
@@ -19,7 +21,7 @@ endif
 
 newlib-$(NEWLIB_VERSION).tar.gz:
 	@echo "Downloading newlib source $(@F)"
-	@wget -q -O $@ ftp://sourceware.org/pub/newlib/newlib-$(NEWLIB_VERSION).tar.gz
+	@wget -q -O $@ https://sourceware.mirror.garr.it/newlib/newlib-$(NEWLIB_VERSION).tar.gz
 
 newlib-$(NEWLIB_VERSION): newlib-$(NEWLIB_VERSION).tar.gz
 	@echo "Extracting $(<F)"
@@ -30,28 +32,28 @@ rebuild-newlib: newlib-$(NEWLIB_VERSION)
 	@echo ""
 	@echo "=== BEGINNING ARM BUILD =========================="
 	@echo ""
-	@rm -rf newlib-arm-$(NEWLIB_VERSION)-out
 	@mkdir -p newlib-arm-$(NEWLIB_VERSION)-out
+	@mkdir -p newlib-arm-$(NEWLIB_VERSION)-install
 	@echo "Entering directory newlib-arm-$(NEWLIB_VERSION)-out"
-	cd newlib-arm-$(NEWLIB_VERSION)-out; ../build-arm.sh ../$<
+	cd newlib-arm-$(NEWLIB_VERSION)-out; ../build-arm.sh ../$< ../newlib-arm-$(NEWLIB_VERSION)-install
 	@echo ""
 	@echo "=== BEGINNING RISC-V BUILD ======================="
 	@echo ""
-	@rm -rf newlib-riscv-$(NEWLIB_VERSION)-out
 	@mkdir -p newlib-riscv-$(NEWLIB_VERSION)-out
+	@mkdir -p newlib-riscv-$(NEWLIB_VERSION)-install
 	@echo "Entering directory newlib-riscv-$(NEWLIB_VERSION)-out"
-	cd newlib-riscv-$(NEWLIB_VERSION)-out; ../build-riscv.sh ../$< $(TOOLCHAIN_rv32i)
+	cd newlib-riscv-$(NEWLIB_VERSION)-out; ../build-riscv.sh ../$< ../newlib-riscv-$(NEWLIB_VERSION)-install $(TOOLCHAIN_rv32i)
 	@echo ""
 	@echo "=== PACKAGING NEWLIB ARTIFACTS ==================="
 	@echo ""
-	@mkdir -p libtock-newlib-$(NEWLIB_VERSION)/thumb
+	@mkdir -p libtock-newlib-$(NEWLIB_VERSION)/arm
 	@mkdir -p libtock-newlib-$(NEWLIB_VERSION)/riscv
 	@cp -r newlib-$(NEWLIB_VERSION)/newlib/libc/include libtock-newlib-$(NEWLIB_VERSION)/headers
-	@rsync -ram --exclude='/*/*/*/*/' --include='libm.a' --include='libc.a' --include='*/' --exclude='*' newlib-arm-$(NEWLIB_VERSION)-out/arm-none-eabi/thumb/ libtock-newlib-$(NEWLIB_VERSION)/thumb/
+	@rsync -ram --exclude='/*/*/*/*/' --include='libm.a' --include='libc.a' --include='*/' --exclude='*' newlib-arm-$(NEWLIB_VERSION)-out/arm-none-eabi/thumb/ libtock-newlib-$(NEWLIB_VERSION)/arm/
 	@rsync -ram --exclude='/*/*/*/*/' --include='libm.a' --include='libc.a' --include='*/' --exclude='*' newlib-riscv-$(NEWLIB_VERSION)-out/$(TOOLCHAIN_rv32i)/ libtock-newlib-$(NEWLIB_VERSION)/riscv/
 	@patch -p1 < newlib-$(NEWLIB_VERSION).patch
 	@zip -r libtock-newlib-$(NEWLIB_VERSION).zip libtock-newlib-$(NEWLIB_VERSION)
 	@echo ""
-	@echo "=== FINISHED NEWLIB ZIP ==================="
+	@echo "=== FINISHED NEWLIB ZIP =========================="
 	@echo ""
 	@sha256sum libtock-newlib-$(NEWLIB_VERSION).zip

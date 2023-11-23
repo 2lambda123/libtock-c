@@ -1,7 +1,8 @@
 #!/usr/bin/env bash
 
 NEWLIB_SRC_DIR=$1
-TARGET=$2
+NEWLIB_INSTALL_DIR=$2
+TARGET=$3
 
 $NEWLIB_SRC_DIR/configure --target=$TARGET \
   --disable-newlib-supplied-syscalls \
@@ -14,6 +15,8 @@ $NEWLIB_SRC_DIR/configure --target=$TARGET \
   --disable-newlib-unbuf-stream-opt \
   --enable-lite-exit \
   --enable-newlib-global-atexit \
-  --enable-newlib-nano-formatted-io
+  --enable-newlib-nano-formatted-io \
+  --prefix=`realpath $NEWLIB_INSTALL_DIR`
 
 make -j$(nproc) CFLAGS_FOR_TARGET='-g -Os -ffunction-sections -fdata-sections'
+make install

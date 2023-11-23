@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
 NEWLIB_SRC_DIR=$1
+NEWLIB_INSTALL_DIR=$2
 
 # We want to end up with newlib compiled for at least the `v6-m/nofp`,
 # `v7-m/nofp`, and `v7e-m/nofp` architectures. For that to happen the
@@ -30,6 +31,8 @@ $NEWLIB_SRC_DIR/configure --target=arm-none-eabi \
   --disable-newlib-unbuf-stream-opt \
   --enable-lite-exit \
   --enable-newlib-global-atexit \
-  --enable-newlib-nano-formatted-io
+  --enable-newlib-nano-formatted-io \
+  --prefix=`realpath $NEWLIB_INSTALL_DIR`
 
 make -j$(nproc) CFLAGS_FOR_TARGET='-g -Os -ffunction-sections -fdata-sections -fPIC -msingle-pic-base -mno-pic-data-is-text-relative'
+make install

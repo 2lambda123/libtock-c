@@ -20,10 +20,8 @@ RUN apt install -y git build-essential wget rsync zip
 RUN apt install -y libmpc-dev file
 
 # Clone the libtock-c source so we can use the build scripts
-RUN git clone https://github.com/tock/libtock-c --depth 1 -b make-precompiled
-RUN cd libtock-c && git fetch && git checkout f262a33b940292713b7137a1f0878144029d8f32
+RUN git clone https://github.com/tock/libtock-c -b make-precompiled
+RUN cd libtock-c && git fetch && git checkout c387ae6abe4117669587024887700f6dae1ecd93
 
 # Actually build the toolchain
 RUN cd libtock-c/libc++ && make GCC_VERSION=10.5.0
-RUN cd libtock-c/libc++ && make GCC_VERSION=11.4.0
-RUN cd libtock-c/libc++ && make GCC_VERSION=12.3.0

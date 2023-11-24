@@ -36,12 +36,12 @@ $(TOCK_USERLAND_BASE_DIR)/lib/libtock-newlib-$(NEWLIB_VERSION)/arm/arm-none-eabi
 $(TOCK_USERLAND_BASE_DIR)/lib/libtock-newlib-$(NEWLIB_VERSION)/arm/arm-none-eabi/lib/thumb/v7e-m/nofp/libc.a: $(TOCK_USERLAND_BASE_DIR)/lib/libtock-newlib-$(NEWLIB_VERSION)
 $(TOCK_USERLAND_BASE_DIR)/lib/libtock-newlib-$(NEWLIB_VERSION)/arm/arm-none-eabi/lib/thumb/v7e-m/nofp/libm.a: $(TOCK_USERLAND_BASE_DIR)/lib/libtock-newlib-$(NEWLIB_VERSION)
 
-$(TOCK_USERLAND_BASE_DIR)/lib/libtock-newlib-$(NEWLIB_VERSION)/riscv/riscv64-unknown-elf/rv32i/ilp32/libc.a: $(TOCK_USERLAND_BASE_DIR)/lib/libtock-newlib-$(NEWLIB_VERSION)
-$(TOCK_USERLAND_BASE_DIR)/lib/libtock-newlib-$(NEWLIB_VERSION)/riscv/riscv64-unknown-elf/rv32i/ilp32/libm.a: $(TOCK_USERLAND_BASE_DIR)/lib/libtock-newlib-$(NEWLIB_VERSION)
-$(TOCK_USERLAND_BASE_DIR)/lib/libtock-newlib-$(NEWLIB_VERSION)/riscv/riscv64-unknown-elf/rv32im/ilp32/libc.a: $(TOCK_USERLAND_BASE_DIR)/lib/libtock-newlib-$(NEWLIB_VERSION)
-$(TOCK_USERLAND_BASE_DIR)/lib/libtock-newlib-$(NEWLIB_VERSION)/riscv/riscv64-unknown-elf/rv32im/ilp32/libm.a: $(TOCK_USERLAND_BASE_DIR)/lib/libtock-newlib-$(NEWLIB_VERSION)
-$(TOCK_USERLAND_BASE_DIR)/lib/libtock-newlib-$(NEWLIB_VERSION)/riscv/riscv64-unknown-elf/rv32imac/ilp32/libc.a: $(TOCK_USERLAND_BASE_DIR)/lib/libtock-newlib-$(NEWLIB_VERSION)
-$(TOCK_USERLAND_BASE_DIR)/lib/libtock-newlib-$(NEWLIB_VERSION)/riscv/riscv64-unknown-elf/rv32imac/ilp32/libm.a: $(TOCK_USERLAND_BASE_DIR)/lib/libtock-newlib-$(NEWLIB_VERSION)
+$(TOCK_USERLAND_BASE_DIR)/lib/libtock-newlib-$(NEWLIB_VERSION)/riscv/riscv64-unknown-elf/lib/rv32i/ilp32/libc.a: $(TOCK_USERLAND_BASE_DIR)/lib/libtock-newlib-$(NEWLIB_VERSION)
+$(TOCK_USERLAND_BASE_DIR)/lib/libtock-newlib-$(NEWLIB_VERSION)/riscv/riscv64-unknown-elf/lib/rv32i/ilp32/libm.a: $(TOCK_USERLAND_BASE_DIR)/lib/libtock-newlib-$(NEWLIB_VERSION)
+$(TOCK_USERLAND_BASE_DIR)/lib/libtock-newlib-$(NEWLIB_VERSION)/riscv/riscv64-unknown-elf/lib/rv32im/ilp32/libc.a: $(TOCK_USERLAND_BASE_DIR)/lib/libtock-newlib-$(NEWLIB_VERSION)
+$(TOCK_USERLAND_BASE_DIR)/lib/libtock-newlib-$(NEWLIB_VERSION)/riscv/riscv64-unknown-elf/lib/rv32im/ilp32/libm.a: $(TOCK_USERLAND_BASE_DIR)/lib/libtock-newlib-$(NEWLIB_VERSION)
+$(TOCK_USERLAND_BASE_DIR)/lib/libtock-newlib-$(NEWLIB_VERSION)/riscv/riscv64-unknown-elf/lib/rv32imac/ilp32/libc.a: $(TOCK_USERLAND_BASE_DIR)/lib/libtock-newlib-$(NEWLIB_VERSION)
+$(TOCK_USERLAND_BASE_DIR)/lib/libtock-newlib-$(NEWLIB_VERSION)/riscv/riscv64-unknown-elf/lib/rv32imac/ilp32/libm.a: $(TOCK_USERLAND_BASE_DIR)/lib/libtock-newlib-$(NEWLIB_VERSION)
 
 ################################################################################
 # LIBC++ Rules

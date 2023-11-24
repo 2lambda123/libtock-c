@@ -29,12 +29,13 @@ build the same newlib that we distribute as part of the libtock-c build system.
 If you want to build and package newlib locally you can use the provided
 `Makefile`.
 
-In the `Makefile`, edit the variable `NEWLIB_VERSION` with the version you want
-to compile. The releases are listed [here](http://sourceware.org/pub/newlib/).
+You must choose by setting the variable `NEWLIB_VERSION` with the version you
+want to compile. The releases are listed
+[here](http://sourceware.org/pub/newlib/).
 
 Then:
 
-    $ make
+    $ make NEWLIB_VERSION=4.3.0.20230120
 
 When the build finishes (it takes a while), a zip folder named
 `libtock-newlib-<version>.zip` will contain the built libraries. You can move
@@ -42,13 +43,10 @@ that folder to the `libtock-c/lib` directory to use the new version of newlib.
 
 ### Docker
 
-There are various ways to use a Dockerfile, but some simple steps to build
-newlib using the Dockerfile look like:
+To help with reproducibility, we provide Dockerfiles for various versions of
+newlib that can generate the compiled version of libtock-newlib.
 
 ```bash
-NEWLIB=4.2.0.20211231
-cd libtock-c/newlib
-docker build -t libtock-c-newlib .
-id=$(docker create libtock-c-newlib)
-docker cp $id:/libtock-c/newlib/libtock-newlib-$NEWLIB.zip libtock-newlib-$NEWLIB.zip
+cd docker/docker-newlib-<version>
+./docker-create.sh
 ```

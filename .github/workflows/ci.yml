@@ -47,6 +47,6 @@ jobs:
       - name: setup-riscv-toolchain
         run: sudo apt-get install -y gcc-riscv64-unknown-elf
       - name: ci-build
-        run: pushd examples; RISCV=1 ./build_all.sh || exit; popd
+        run: pushd examples; ./build_all.sh || exit; popd
       - name: ci-debug-build
         run: pushd examples/blink; make debug RAM_START=0x20004000 FLASH_INIT=0x30051 || exit; popd

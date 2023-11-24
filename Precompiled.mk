@@ -23,25 +23,50 @@ PRECOMPILED_MAKEFILE = 1
 ################################################################################
 
 # Target to download and extract newlib.
-$(TOCK_USERLAND_BASE_DIR)/lib/libtock-newlib-$(NEWLIB_VERSION):
-	cd $(TOCK_USERLAND_BASE_DIR)/lib; ./fetch-newlib.sh $(NEWLIB_VERSION)
+$(TOCK_USERLAND_BASE_DIR)/lib/libtock-newlib-4.2.0.20211231:
+	cd $(TOCK_USERLAND_BASE_DIR)/lib; ./fetch-newlib.sh 4.2.0.20211231
+
+# Target to download and extract newlib.
+$(TOCK_USERLAND_BASE_DIR)/lib/libtock-newlib-4.3.0.20230120:
+	cd $(TOCK_USERLAND_BASE_DIR)/lib; ./fetch-newlib.sh 4.3.0.20230120
 
 # Helper rule to specify newlib as a dependency in the libtock-c build system.
-newlib: | $(TOCK_USERLAND_BASE_DIR)/lib/libtock-newlib-$(NEWLIB_VERSION)
+newlib-4.2.0.20211231: | $(TOCK_USERLAND_BASE_DIR)/lib/libtock-newlib-4.2.0.20211231
 
-$(TOCK_USERLAND_BASE_DIR)/lib/libtock-newlib-$(NEWLIB_VERSION)/arm/arm-none-eabi/lib/thumb/v6-m/nofp/libc.a: $(TOCK_USERLAND_BASE_DIR)/lib/libtock-newlib-$(NEWLIB_VERSION)
-$(TOCK_USERLAND_BASE_DIR)/lib/libtock-newlib-$(NEWLIB_VERSION)/arm/arm-none-eabi/lib/thumb/v6-m/nofp/libm.a: $(TOCK_USERLAND_BASE_DIR)/lib/libtock-newlib-$(NEWLIB_VERSION)
-$(TOCK_USERLAND_BASE_DIR)/lib/libtock-newlib-$(NEWLIB_VERSION)/arm/arm-none-eabi/lib/thumb/v7-m/nofp/libc.a: $(TOCK_USERLAND_BASE_DIR)/lib/libtock-newlib-$(NEWLIB_VERSION)
-$(TOCK_USERLAND_BASE_DIR)/lib/libtock-newlib-$(NEWLIB_VERSION)/arm/arm-none-eabi/lib/thumb/v7-m/nofp/libm.a: $(TOCK_USERLAND_BASE_DIR)/lib/libtock-newlib-$(NEWLIB_VERSION)
-$(TOCK_USERLAND_BASE_DIR)/lib/libtock-newlib-$(NEWLIB_VERSION)/arm/arm-none-eabi/lib/thumb/v7e-m/nofp/libc.a: $(TOCK_USERLAND_BASE_DIR)/lib/libtock-newlib-$(NEWLIB_VERSION)
-$(TOCK_USERLAND_BASE_DIR)/lib/libtock-newlib-$(NEWLIB_VERSION)/arm/arm-none-eabi/lib/thumb/v7e-m/nofp/libm.a: $(TOCK_USERLAND_BASE_DIR)/lib/libtock-newlib-$(NEWLIB_VERSION)
+newlib-4.3.0.20230120: | $(TOCK_USERLAND_BASE_DIR)/lib/libtock-newlib-4.3.0.20230120
 
-$(TOCK_USERLAND_BASE_DIR)/lib/libtock-newlib-$(NEWLIB_VERSION)/riscv/riscv64-unknown-elf/lib/rv32i/ilp32/libc.a: $(TOCK_USERLAND_BASE_DIR)/lib/libtock-newlib-$(NEWLIB_VERSION)
-$(TOCK_USERLAND_BASE_DIR)/lib/libtock-newlib-$(NEWLIB_VERSION)/riscv/riscv64-unknown-elf/lib/rv32i/ilp32/libm.a: $(TOCK_USERLAND_BASE_DIR)/lib/libtock-newlib-$(NEWLIB_VERSION)
-$(TOCK_USERLAND_BASE_DIR)/lib/libtock-newlib-$(NEWLIB_VERSION)/riscv/riscv64-unknown-elf/lib/rv32im/ilp32/libc.a: $(TOCK_USERLAND_BASE_DIR)/lib/libtock-newlib-$(NEWLIB_VERSION)
-$(TOCK_USERLAND_BASE_DIR)/lib/libtock-newlib-$(NEWLIB_VERSION)/riscv/riscv64-unknown-elf/lib/rv32im/ilp32/libm.a: $(TOCK_USERLAND_BASE_DIR)/lib/libtock-newlib-$(NEWLIB_VERSION)
-$(TOCK_USERLAND_BASE_DIR)/lib/libtock-newlib-$(NEWLIB_VERSION)/riscv/riscv64-unknown-elf/lib/rv32imac/ilp32/libc.a: $(TOCK_USERLAND_BASE_DIR)/lib/libtock-newlib-$(NEWLIB_VERSION)
-$(TOCK_USERLAND_BASE_DIR)/lib/libtock-newlib-$(NEWLIB_VERSION)/riscv/riscv64-unknown-elf/lib/rv32imac/ilp32/libm.a: $(TOCK_USERLAND_BASE_DIR)/lib/libtock-newlib-$(NEWLIB_VERSION)
+# newlib 4.2.0.20211231
+
+$(TOCK_USERLAND_BASE_DIR)/lib/libtock-newlib-4.2.0.20211231/arm/arm-none-eabi/lib/thumb/v6-m/nofp/libc.a: $(TOCK_USERLAND_BASE_DIR)/lib/libtock-newlib-4.2.0.20211231
+$(TOCK_USERLAND_BASE_DIR)/lib/libtock-newlib-4.2.0.20211231/arm/arm-none-eabi/lib/thumb/v6-m/nofp/libm.a: $(TOCK_USERLAND_BASE_DIR)/lib/libtock-newlib-4.2.0.20211231
+$(TOCK_USERLAND_BASE_DIR)/lib/libtock-newlib-4.2.0.20211231/arm/arm-none-eabi/lib/thumb/v7-m/nofp/libc.a: $(TOCK_USERLAND_BASE_DIR)/lib/libtock-newlib-4.2.0.20211231
+$(TOCK_USERLAND_BASE_DIR)/lib/libtock-newlib-4.2.0.20211231/arm/arm-none-eabi/lib/thumb/v7-m/nofp/libm.a: $(TOCK_USERLAND_BASE_DIR)/lib/libtock-newlib-4.2.0.20211231
+$(TOCK_USERLAND_BASE_DIR)/lib/libtock-newlib-4.2.0.20211231/arm/arm-none-eabi/lib/thumb/v7e-m/nofp/libc.a: $(TOCK_USERLAND_BASE_DIR)/lib/libtock-newlib-4.2.0.20211231
+$(TOCK_USERLAND_BASE_DIR)/lib/libtock-newlib-4.2.0.20211231/arm/arm-none-eabi/lib/thumb/v7e-m/nofp/libm.a: $(TOCK_USERLAND_BASE_DIR)/lib/libtock-newlib-4.2.0.20211231
+
+$(TOCK_USERLAND_BASE_DIR)/lib/libtock-newlib-4.2.0.20211231/riscv/riscv64-unknown-elf/lib/rv32i/ilp32/libc.a: $(TOCK_USERLAND_BASE_DIR)/lib/libtock-newlib-4.2.0.20211231
+$(TOCK_USERLAND_BASE_DIR)/lib/libtock-newlib-4.2.0.20211231/riscv/riscv64-unknown-elf/lib/rv32i/ilp32/libm.a: $(TOCK_USERLAND_BASE_DIR)/lib/libtock-newlib-4.2.0.20211231
+$(TOCK_USERLAND_BASE_DIR)/lib/libtock-newlib-4.2.0.20211231/riscv/riscv64-unknown-elf/lib/rv32im/ilp32/libc.a: $(TOCK_USERLAND_BASE_DIR)/lib/libtock-newlib-4.2.0.20211231
+$(TOCK_USERLAND_BASE_DIR)/lib/libtock-newlib-4.2.0.20211231/riscv/riscv64-unknown-elf/lib/rv32im/ilp32/libm.a: $(TOCK_USERLAND_BASE_DIR)/lib/libtock-newlib-4.2.0.20211231
+$(TOCK_USERLAND_BASE_DIR)/lib/libtock-newlib-4.2.0.20211231/riscv/riscv64-unknown-elf/lib/rv32imac/ilp32/libc.a: $(TOCK_USERLAND_BASE_DIR)/lib/libtock-newlib-4.2.0.20211231
+$(TOCK_USERLAND_BASE_DIR)/lib/libtock-newlib-4.2.0.20211231/riscv/riscv64-unknown-elf/lib/rv32imac/ilp32/libm.a: $(TOCK_USERLAND_BASE_DIR)/lib/libtock-newlib-4.2.0.20211231
+
+# newlib 4.3.0.20230120
+
+$(TOCK_USERLAND_BASE_DIR)/lib/libtock-newlib-4.3.0.20230120/arm/arm-none-eabi/lib/thumb/v6-m/nofp/libc.a: $(TOCK_USERLAND_BASE_DIR)/lib/libtock-newlib-4.3.0.20230120
+$(TOCK_USERLAND_BASE_DIR)/lib/libtock-newlib-4.3.0.20230120/arm/arm-none-eabi/lib/thumb/v6-m/nofp/libm.a: $(TOCK_USERLAND_BASE_DIR)/lib/libtock-newlib-4.3.0.20230120
+$(TOCK_USERLAND_BASE_DIR)/lib/libtock-newlib-4.3.0.20230120/arm/arm-none-eabi/lib/thumb/v7-m/nofp/libc.a: $(TOCK_USERLAND_BASE_DIR)/lib/libtock-newlib-4.3.0.20230120
+$(TOCK_USERLAND_BASE_DIR)/lib/libtock-newlib-4.3.0.20230120/arm/arm-none-eabi/lib/thumb/v7-m/nofp/libm.a: $(TOCK_USERLAND_BASE_DIR)/lib/libtock-newlib-4.3.0.20230120
+$(TOCK_USERLAND_BASE_DIR)/lib/libtock-newlib-4.3.0.20230120/arm/arm-none-eabi/lib/thumb/v7e-m/nofp/libc.a: $(TOCK_USERLAND_BASE_DIR)/lib/libtock-newlib-4.3.0.20230120
+$(TOCK_USERLAND_BASE_DIR)/lib/libtock-newlib-4.3.0.20230120/arm/arm-none-eabi/lib/thumb/v7e-m/nofp/libm.a: $(TOCK_USERLAND_BASE_DIR)/lib/libtock-newlib-4.3.0.20230120
+
+$(TOCK_USERLAND_BASE_DIR)/lib/libtock-newlib-4.3.0.20230120/riscv/riscv64-unknown-elf/lib/rv32i/ilp32/libc.a: $(TOCK_USERLAND_BASE_DIR)/lib/libtock-newlib-4.3.0.20230120
+$(TOCK_USERLAND_BASE_DIR)/lib/libtock-newlib-4.3.0.20230120/riscv/riscv64-unknown-elf/lib/rv32i/ilp32/libm.a: $(TOCK_USERLAND_BASE_DIR)/lib/libtock-newlib-4.3.0.20230120
+$(TOCK_USERLAND_BASE_DIR)/lib/libtock-newlib-4.3.0.20230120/riscv/riscv64-unknown-elf/lib/rv32im/ilp32/libc.a: $(TOCK_USERLAND_BASE_DIR)/lib/libtock-newlib-4.3.0.20230120
+$(TOCK_USERLAND_BASE_DIR)/lib/libtock-newlib-4.3.0.20230120/riscv/riscv64-unknown-elf/lib/rv32im/ilp32/libm.a: $(TOCK_USERLAND_BASE_DIR)/lib/libtock-newlib-4.3.0.20230120
+$(TOCK_USERLAND_BASE_DIR)/lib/libtock-newlib-4.3.0.20230120/riscv/riscv64-unknown-elf/lib/rv32imac/ilp32/libc.a: $(TOCK_USERLAND_BASE_DIR)/lib/libtock-newlib-4.3.0.20230120
+$(TOCK_USERLAND_BASE_DIR)/lib/libtock-newlib-4.3.0.20230120/riscv/riscv64-unknown-elf/lib/rv32imac/ilp32/libm.a: $(TOCK_USERLAND_BASE_DIR)/lib/libtock-newlib-4.3.0.20230120
+
 
 ################################################################################
 # LIBC++ Rules

@@ -34,46 +34,27 @@ Prerequisites
 
 1. The main requirement to build the C applications in this repository is having
    cross compilers for embedded targets. You will need an `arm-none-eabi`
-   toolchain for Cortex-M targets.
+   toolchain for Cortex-M targets and a RISC-V toolchain for rv32 targets.
 
    **MacOS**:
    ```
-   $ brew install arm-none-eabi-gcc
+   $ brew install arm-none-eabi-gcc riscv64-elf-gcc
    ```
 
    **Ubuntu**:
    ```
-   $ sudo apt install gcc-arm-none-eabi
+   $ sudo apt install gcc-arm-none-eabi gcc-riscv64-unknown-elf
    ```
 
    **Arch**:
    ```
-   $ sudo pacman -Syu arm-none-eabi-gcc
+   $ sudo pacman -Syu arm-none-eabi-gcc riscv64-elf-gcc
    ```
 
    **Fedora**:
    ```
    $ sudo dnf install arm-none-eabi-gcc-cs
    ```
-
-2. libtock-c also includes support for building for ***RISC-V targets***.
-
-   **MacOS**:
-   ```
-   $ brew install riscv64-elf-gcc
-   ```
-
-   **Ubuntu**:
-   ```
-   $ sudo apt install gcc-riscv64-unknown-elf
-   ```
-
-   **Arch**:
-   ```
-   $ sudo pacman -Syu riscv64-elf-gcc
-   ```
-
-   **Fedora**:
 
    **dnf** does not contain the `riscv-gnu-toolchain`, an alternative is to
    compile from source. Start with some of the tools we need to compile the
